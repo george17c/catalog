@@ -1,0 +1,1 @@
+Use `./allocation-granularity <num_bytes>` to run the program.
