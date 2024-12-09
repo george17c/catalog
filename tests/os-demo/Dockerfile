@@ -65,13 +65,18 @@ COPY ./yield /src/yield
 COPY ./utils /src/utils
 COPY ./Makefile /src
 
-RUN apt-get update
-RUN apt-get -yqq install gdc
-RUN apt-get -yqq install gcc-multilib
-RUN apt-get -yqq install default-jdk
-RUN apt-get -yqq install default-jre
-RUN apt-get -yqq install python3
-RUN apt-get -yqq install nasm
+RUN apt-get update && apt-get -yqq install \
+    gdc \
+    gcc-multilib \
+    libc6-dev-i386 \
+    default-jdk \
+    default-jre \
+    python3 \
+    nasm
+
+RUN dpkg --add-architecture i386
+RUN apt-get update && apt-get -yqq install \
+    libc6:i386 libc6-dev:i386 libgcc-12-dev:i386 gcc-12-multilib
 
 RUN make
 
